@@ -1,5 +1,6 @@
 package com.imhaider.springbootmysql.controller;
 
+import com.imhaider.springbootmysql.dto.UserDTO;
 import com.imhaider.springbootmysql.entity.User;
 import com.imhaider.springbootmysql.services.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,22 +19,22 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping()
-    public List<User> getUsers(){
+    public List<UserDTO> getUsers(){
         return userService.getUsers();
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable final Integer id){
+    public UserDTO getUser(@PathVariable final Integer id){
         return userService.getUser(id);
     }
 
     @PostMapping()
-    public User insert(@RequestBody final User user){
+    public UserDTO insert(@RequestBody final User user){
         return userService.createUser(user);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable final Integer id, @RequestBody final User user){
+    public UserDTO updateUser(@PathVariable final Integer id, @RequestBody final User user){
         return userService.updateUser(id, user);
     }
 
