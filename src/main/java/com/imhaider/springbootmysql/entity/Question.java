@@ -3,7 +3,9 @@ package com.imhaider.springbootmysql.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -12,16 +14,13 @@ import java.util.List;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long question_id;
+    private Long id;
 
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id")
-    private Quiz quiz;
+    @ManyToMany(mappedBy = "questions")
+    private Set<Quiz> quizzes = new HashSet<>();
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question")
     private List<Answer> answers;
-
-    // Constructors, getters, and setters
 }

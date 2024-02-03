@@ -2,7 +2,6 @@ package com.imhaider.springbootmysql.controller.quiz;
 
 import com.imhaider.springbootmysql.entity.Quiz;
 import com.imhaider.springbootmysql.services.quiz.QuizService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
