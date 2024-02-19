@@ -3,11 +3,10 @@ import com.imhaider.springbootmysql.entity.User;
 import com.imhaider.springbootmysql.mapper.UserMapper;
 import com.imhaider.springbootmysql.repo.UserRepository;
 import org.springframework.stereotype.Service;
-import com.imhaider.springbootmysql.dto.UserDTO;
+import com.imhaider.springbootmysql.dto.user.UserDTO;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -17,8 +16,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<UserDTO> getUsers(){
-        return userRepository.findAll().parallelStream().map(UserMapper::toDto).collect(Collectors.toList());
+    public List<User> getUsers(){
+        return userRepository.findAll();
     }
 
 
@@ -33,8 +32,8 @@ public class UserService {
         }
         return user.map(UserMapper::toDto).get();
     }
-    public Optional<UserDTO> getUser(final String email) {
-        return userRepository.findUserByEmail(email).map(UserMapper::toDto);
+    public Optional<User> getUser(final String email) {
+        return userRepository.findUserByEmail(email);
     }
 
     public UserDTO updateUser(final Integer id, final User user) {

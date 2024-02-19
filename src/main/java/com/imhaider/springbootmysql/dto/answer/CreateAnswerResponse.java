@@ -1,4 +1,4 @@
-package com.imhaider.springbootmysql.dto;
+package com.imhaider.springbootmysql.dto.answer;
 
 import com.imhaider.springbootmysql.entity.Answer;
 import lombok.Builder;
@@ -11,13 +11,13 @@ import java.util.List;
 public class CreateAnswerResponse {
     long id;
     String content;
-    boolean isCorrect;
+    //boolean isCorrect;
 
     public static CreateAnswerResponse of(final Answer answer) {
         return CreateAnswerResponse.builder()
                 .id(answer.getId())
                 .content(answer.getContent())
-                .isCorrect(answer.isCorrect())
+                //.isCorrect(answer.isCorrect())
                 .build();
     }
 

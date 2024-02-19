@@ -1,7 +1,11 @@
 package com.imhaider.springbootmysql.controller.quiz;
 
+import com.imhaider.springbootmysql.dto.quiz.CreateQuizRequest;
+import com.imhaider.springbootmysql.dto.quiz.CreateQuizResponse;
 import com.imhaider.springbootmysql.entity.Quiz;
 import com.imhaider.springbootmysql.services.quiz.QuizService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +19,10 @@ public class QuizController {
     }
 
     @PostMapping
-    public Quiz createQuiz(@RequestBody Quiz quiz) {
-        return quizService.createQuiz(quiz);
+    public ResponseEntity<CreateQuizResponse> createQuiz(@RequestBody CreateQuizRequest quizRequest, Authentication authentication) {
+        Quiz quiz = quizService.createQuiz(quizRequest, authentication);
+        System.out.println(quiz);
+        return ResponseEntity.ok(CreateQuizResponse.of(quiz));
     }
 
     @GetMapping("/{quizId}")

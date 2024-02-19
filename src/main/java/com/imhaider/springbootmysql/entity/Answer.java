@@ -1,25 +1,28 @@
 package com.imhaider.springbootmysql.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="answer")
-@Entity
 @Builder
-public class Answer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Entity
+public class Answer extends Identity{
 
     private String content;
 
-    private boolean isCorrect = false;
+    @Column(columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean isCorrect;
 
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
 
-    // Constructors, getters, and setters
+    // Constructors (you can keep your explicit constructors here)
 }

@@ -38,6 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             token = requestHeader.substring(7);
             try {
                 username = this.jwtHelper.getUsernameFromToken(token);
+                System.out.println("Username"+username);
             } catch (IllegalArgumentException e) {
                 logger.info("Illegal Argument while fetching the username !!");
                 e.printStackTrace();
@@ -56,7 +57,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (username != null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             Boolean validateToken = this.jwtHelper.validateToken(token, userDetails);
+            System.out.println("Validate Token :"+validateToken);
             if (validateToken) {
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);

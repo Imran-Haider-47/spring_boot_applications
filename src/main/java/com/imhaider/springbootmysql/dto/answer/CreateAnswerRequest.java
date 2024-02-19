@@ -1,4 +1,4 @@
-package com.imhaider.springbootmysql.dto;
+package com.imhaider.springbootmysql.dto.answer;
 
 import lombok.Data;
 import lombok.Value;

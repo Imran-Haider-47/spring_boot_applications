@@ -1,7 +1,6 @@
 package com.imhaider.springbootmysql.security;
 
-import com.imhaider.springbootmysql.dto.UserDTO;
-import com.imhaider.springbootmysql.entity.User;
+import com.imhaider.springbootmysql.dto.user.UserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

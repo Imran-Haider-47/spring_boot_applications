@@ -1,13 +1,13 @@
 package com.imhaider.springbootmysql.controller;
 
-import com.imhaider.springbootmysql.dto.UserDTO;
+import com.imhaider.springbootmysql.dto.user.UserDTO;
 import com.imhaider.springbootmysql.entity.User;
 import com.imhaider.springbootmysql.enums.Role;
+import com.imhaider.springbootmysql.mapper.UserMapper;
 import com.imhaider.springbootmysql.security.JwtHelper;
 import com.imhaider.springbootmysql.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +31,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) throws Exception {
-        Optional<UserDTO> existingUser = userService.getUser(user.getEmail());
+        Optional<UserDTO> existingUser = userService.getUser(user.getEmail()).map(UserMapper::toDto);
         if(existingUser.isPresent()){
             // If authentication is successful, generate a JWT token
             String token = jwtHelper.generateToken(existingUser.get());
@@ -46,7 +46,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody User user) throws Exception {
         // Check if user already exists (e.g., by username or email)
-        Optional <UserDTO> existingUser = userService.getUser(user.getEmail());
+        Optional <UserDTO> existingUser = userService.getUser(user.getEmail()).map(UserMapper::toDto);
         if (existingUser.isPresent()) {
             throw new Exception("User with this email already exists!");
         }

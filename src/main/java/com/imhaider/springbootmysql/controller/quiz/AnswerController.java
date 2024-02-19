@@ -1,6 +1,6 @@
 package com.imhaider.springbootmysql.controller.quiz;
 
-import com.imhaider.springbootmysql.dto.CreateAnswerRequest;
+import com.imhaider.springbootmysql.dto.answer.CreateAnswerRequest;
 import com.imhaider.springbootmysql.entity.Answer;
 import com.imhaider.springbootmysql.services.quiz.AnswerService;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +23,16 @@ public class AnswerController {
     @GetMapping("/{answerId}")
     public Answer getAnswerById(@PathVariable Long answerId) {
         return answerService.getAnswerById(answerId);
+    }
+
+    @PutMapping("/{answerId}")
+    public Answer updateAnswer(@PathVariable Long answerId, @RequestBody CreateAnswerRequest answerRequest){
+        return answerService.updateAnswer(answerId, answerRequest);
+    }
+
+    @DeleteMapping("/{answerId}")
+    public String deleteAnswer(@PathVariable Long answerId){
+        return answerService.deleteAnswer(answerId);
     }
 
     // Add more endpoints for fetching all answers, updating answers, deleting answers, etc.

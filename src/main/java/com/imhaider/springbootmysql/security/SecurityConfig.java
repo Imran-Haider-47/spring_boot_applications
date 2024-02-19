@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/v2/**").authenticated()
                 .anyRequest()
                 .authenticated()
-                .and().exceptionHandling(ex -> ex.authenticationEntryPoint(point))
+                .and()//.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
