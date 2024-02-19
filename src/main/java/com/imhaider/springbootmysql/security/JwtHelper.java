@@ -1,6 +1,6 @@
 package com.imhaider.springbootmysql.security;
 
-import com.imhaider.springbootmysql.entity.User;
+import com.imhaider.springbootmysql.dto.user.UserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -33,7 +33,7 @@ public class JwtHelper {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
-    public String generateToken(User userDetails) {
+    public String generateToken(UserDTO userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return doGenerateToken(claims, userDetails.getEmail());
     }
